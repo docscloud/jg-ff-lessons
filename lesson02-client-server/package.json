@@ -1,0 +1,16 @@
+{
+  "name": "client-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  },
+  "scripts": {
+    "start": "nodemon -w index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
