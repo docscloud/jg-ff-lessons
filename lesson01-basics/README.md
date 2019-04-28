@@ -96,13 +96,15 @@ typeof str; // вернёт string
 13 % 3; // вернёт 1
 ```
 
-### Операторы присваивания
+### Оператор присваивания
 
 `=` присваивает значение переменной
 
 ```javascript
 var a = 'str';
 ```
+
+#### Сокращённая арифметика с присваиванием
 
 `+=` складывает передаваемое значение с текущим значением переменной
 
@@ -115,6 +117,17 @@ b += 11; // значение b станет 13
 ```
 
 `-=` по аналогии с `+=` вычитает передаваемое значение из текущего значения переменной. Работает только для чисел, для остальных значений возвращает **NaN**
+
+так же `*=` и `/=`
+
+```javascript
+var n = 2;
+n += 5; // значение n станет 7
+n *= 2; // значение n станет 14
+
+var a = 4;
+a /= 2; // значение a станет 2
+```
 
 ### Операторы сравнения
 
@@ -231,6 +244,85 @@ a === b     // вернёт true
 0 == null (при этом 0 == undefined вернёт false)
 null == undefined
 1 == true
+```
+
+### Условные операторы
+
+Позволяют выполнить различные действия в зависимости от определенных условий
+
+`if (...) {...}` вычисляет и преобразует выражение в скобках к логическому типу.
+
+```javascript
+var condition = true;
+
+if (condition) {
+  // do something
+}
+```
+
+`else {...}` Необязательный блок else («иначе») выполняется, если условие в `if (...) {...}` неверно
+
+```javascript
+var condition = false;
+
+if (condition) {
+  // do something
+} else {
+  // do some default operation
+}
+```
+
+`else if` позволяет проверить несколько условий
+
+```javascript
+var condition1 = false;
+var condition2 = false;
+var condition3 = false;
+
+if (condition1) {
+  // do something
+} else if (condition2) {
+  // do something else
+} else if (condition3) {
+  // do something else
+}
+```
+
+`<condition> ? <value if true> : <value if false>` тернарный оператор, возвращает первое значение если условия **true** и второе если условие **false**
+
+```javascript
+var condition = true;
+
+var value = condition ? 'one' : 'two';
+
+// эквивалентно
+var value;
+
+if (condition) {
+  value = 'one';
+} else {
+  value = 'two';
+}
+```
+
+### Логические операторы
+
+`||` логическое **или**, если хоть один из аргументов `true` возвращает `true`
+
+```javascript
+var a = true;
+var b = false;
+
+a || b; // вернёт true
+```
+
+`&&` логическое **и**, если все аргументы `true` возвращает `true`
+
+```javascript
+var a = true;
+var b = false;
+
+a && b; // вернёт false
 ```
 
 ## Поддержка стандартов
