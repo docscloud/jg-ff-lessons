@@ -1,0 +1,40 @@
+{
+  "name": "school",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "test": "jest",
+    "jest": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://janiskachans:29713622aA@bitbucket.org/barmalej/school.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/barmalej/school#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "babel-eslint": "^8.2.5",
+    "babel-jest": "^24.5.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.1.0",
+    "jest": "^24.5.0",
+    "prettier": "^1.16.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "firebase": "^5.2.0",
+    "firebaseui": "^3.5.2",
+    "react": "^16.8.4"
+  }
+}
