@@ -5,8 +5,8 @@ const renderList = () => {
   const { items } = getState();
   const list = document.createElement('ul');
 
-  items.forEach(item => {
-    list.appendChild(renderListItem(item));
+  items.forEach((item, index) => {
+    list.appendChild(renderListItem(item, index));
   });
 
   return list;

@@ -4,7 +4,7 @@ import renderList from './components/render-list';
 import renderInput from './components/render-input';
 import renderButton from './components/render-button';
 
-let state = { items: [], inputValue: '' };
+let state = { items: [{ name: 'Test item' }], inputValue: '' };
 export const getState = () => state;
 export const updateState = newState => {
   state = { ...state, ...newState };
@@ -12,7 +12,7 @@ export const updateState = newState => {
 };
 
 const render = () => {
-  console.log('RENDER', state);
+  // console.log('RENDER', state);
   const app = document.getElementById('app');
   app.innerHTML = '';
 
