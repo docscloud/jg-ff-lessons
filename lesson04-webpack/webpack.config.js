@@ -1,3 +1,14 @@
+const path = require('path');
+
 module.exports = {
-  entry: './src/app.js'
+  mode: 'development',
+  entry: './src/app.js',
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
+  }
 };
