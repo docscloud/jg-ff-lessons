@@ -1,6 +1,8 @@
 import renderListItem from './render-list-item';
+import { getState } from '../app';
 
-const renderList = ({ items }) => {
+const renderList = () => {
+  const { items } = getState();
   const list = document.createElement('ul');
 
   items.forEach(item => {

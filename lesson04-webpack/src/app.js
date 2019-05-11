@@ -4,14 +4,25 @@ import renderList from './components/render-list';
 import renderInput from './components/render-input';
 import renderButton from './components/render-button';
 
-const state = { items: [{ name: 'Test item from state' }] };
+let state = { items: [], inputValue: '' };
+export const getState = () => state;
+export const updateState = newState => {
+  state = { ...state, ...newState };
+  render();
+};
 
 const render = () => {
+  console.log('RENDER', state);
   const app = document.getElementById('app');
+  app.innerHTML = '';
 
-  [renderHeading(), renderList(state), renderInput(), renderButton()].forEach(
-    element => app.appendChild(element)
+  const input = renderInput();
+
+  [renderHeading(), renderList(), input, renderButton()].forEach(element =>
+    app.appendChild(element)
   );
+
+  input.focus();
 };
 
 render();
