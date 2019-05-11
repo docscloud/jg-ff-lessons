@@ -1,1 +1,3 @@
-console.log('Hello webpack');
+import hw from './module/hw';
+
+hw();
