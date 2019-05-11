@@ -1,3 +1,9 @@
 body {
   color: aqua;
 }
+
+#logo {
+  width: 440px;
+  height: 146px;
+  background: url('../img/javaguru.png');
+}
