@@ -97,6 +97,17 @@ eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader/dist/c
 
 /***/ }),
 
+/***/ "./img/jg_280_rgb.svg":
+/*!****************************!*\
+  !*** ./img/jg_280_rgb.svg ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"ab41c6d6c0d736db34ed5a0da2ee178e.svg\";\n\n//# sourceURL=webpack:///./img/jg_280_rgb.svg?");
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./css/app.css":
 /*!***********************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./css/app.css ***!
@@ -150,7 +161,7 @@ eval("\n/**\n * When source maps are enabled, `style-loader` uses a link element
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var css_app_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! css/app.css */ \"./css/app.css\");\n/* harmony import */ var css_app_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(css_app_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var utils_hw__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! utils/hw */ \"./src/utils/hw.js\");\n\n\n\nObject(utils_hw__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var css_app_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! css/app.css */ \"./css/app.css\");\n/* harmony import */ var css_app_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(css_app_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _img_jg_280_rgb_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/jg_280_rgb.svg */ \"./img/jg_280_rgb.svg\");\n/* harmony import */ var _img_jg_280_rgb_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_img_jg_280_rgb_svg__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var utils_hw__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! utils/hw */ \"./src/utils/hw.js\");\n\n\n\n\nObject(utils_hw__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\n\nconst logo = document.getElementById('logo');\nconst img = new Image();\nimg.src = `build/${_img_jg_280_rgb_svg__WEBPACK_IMPORTED_MODULE_1___default.a}`;\nimg.width = 200;\n\nlogo.appendChild(img);\n\nconsole.log(_img_jg_280_rgb_svg__WEBPACK_IMPORTED_MODULE_1___default.a);\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
