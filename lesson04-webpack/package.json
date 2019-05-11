@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -w src --exec webpack"
+    "dev": "nodemon -w src -w css -w webpack.config.js --exec webpack"
   },
   "keywords": [],
   "author": "",

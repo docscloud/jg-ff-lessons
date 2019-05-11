@@ -1,4 +1,4 @@
-import '../css/app.css';
-import hw from './module/hw';
+import 'css/app.css';
+import hw from 'utils/hw';
 
 hw();
