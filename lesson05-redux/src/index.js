@@ -11,12 +11,15 @@ const counter = (state = 0, action) => {
 
 const createStore = reducer => {
   let state;
+  let listeners = [];
 
   const getState = () => state;
 
   const dispatch = action => {};
 
-  const subscribe = listener => {};
+  const subscribe = listener => {
+    listeners.push(listener);
+  };
 
   return { getState, dispatch, subscribe };
 };
