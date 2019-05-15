@@ -2,7 +2,7 @@ import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
 const removeCounter = (list, index) => {
-  return list.slice(0, index).concat(list.slice(index + 1));
+  return [...list.slice(0, index), ...list.slice(index + 1)];
 };
 
 const testRemoveCounter = () => {
