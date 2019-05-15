@@ -2,19 +2,22 @@ import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
 const toggleTodo = todo => {
-  todo.complete = !todo.complete;
-  return todo;
+  return {
+    id: todo.id,
+    text: todo.text,
+    complete: !todo.complete
+  };
 };
 
 const testToggleTodo = () => {
   const todoBefore = {
     id: 0,
-    test: 'Learn redux',
+    text: 'Learn redux',
     complete: false
   };
   const todoAfter = {
     id: 0,
-    test: 'Learn redux',
+    text: 'Learn redux',
     complete: true
   };
 
