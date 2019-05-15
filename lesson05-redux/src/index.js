@@ -1,21 +1,27 @@
 import expect from 'expect';
-import deepFreeze from 'deep-freeze';
 
-const removeCounter = (list, index) => {
-  return [...list.slice(0, index), ...list.slice(index + 1)];
+const toggleTodo = todo => {
+  todo.complete = !todo.complete;
+  return todo;
 };
 
-const testRemoveCounter = () => {
-  const listBefore = [0, 10, 20];
-  const listAfter = [0, 20];
+const testToggleTodo = () => {
+  const todoBefore = {
+    id: 0,
+    test: 'Learn redux',
+    complete: false
+  };
+  const todoAfter = {
+    id: 0,
+    test: 'Learn redux',
+    complete: true
+  };
 
-  deepFreeze(listBefore);
-
-  expect(removeCounter(listBefore, 1)).toEqual(listAfter);
+  expect(toggleTodo(todoBefore, 1)).toEqual(todoAfter);
 };
 
 try {
-  testRemoveCounter();
+  testToggleTodo();
   document.body.innerHTML = '<h1 style="color: green">Test passed</h1>';
 } catch (e) {
   document.body.innerHTML = `<h1 style="color: red">Test failed</h1><p>${
