@@ -1,46 +1,22 @@
-// import { createStore } from 'redux';
+import expect from 'expect';
 
-const counter = (state = 0, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    default:
-      return state;
-  }
+const addCounter = list => {
+  list.push(0);
+  return list;
 };
 
-const createStore = reducer => {
-  let state;
-  let listeners = [];
+const testAddCounter = () => {
+  const listBefore = [];
+  const listAfter = [0];
 
-  const getState = () => state;
-
-  const dispatch = action => {
-    state = reducer(state, action);
-    listeners.forEach(listener => listener());
-  };
-
-  const subscribe = listener => {
-    listeners.push(listener);
-    return () => {
-      listeners = listeners.filter(l => l !== listener);
-    };
-  };
-
-  dispatch({});
-
-  return { getState, dispatch, subscribe };
+  expect(addCounter(listBefore)).toEqual(listAfter);
 };
 
-const store = createStore(counter);
-
-const render = () => {
-  document.body.innerText = store.getState();
-};
-
-store.subscribe(render);
-render();
-
-document.addEventListener('click', () => {
-  store.dispatch({ type: 'INCREMENT' });
-});
+try {
+  testAddCounter();
+  document.body.innerHTML = '<h1 style="color: green">Test passed</h1>';
+} catch (e) {
+  document.body.innerHTML = `<h1 style="color: red">Test failed</h1><p>${
+    e.message
+  }</p>`;
+}
