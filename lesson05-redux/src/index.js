@@ -1,6 +1,6 @@
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
 
-const reducer = (state = 0, action) => {
+const counter = (state = 0, action) => {
   switch (action.type) {
     case 'INCREMENT':
       return state + 1;
@@ -9,7 +9,19 @@ const reducer = (state = 0, action) => {
   }
 };
 
-const store = createStore(reducer);
+const createStore = reducer => {
+  let state;
+
+  const getState = () => state;
+
+  const dispatch = action => {};
+
+  const subscribe = listener => {};
+
+  return { getState, dispatch, subscribe };
+};
+
+const store = createStore(counter);
 
 const render = () => {
   document.body.innerText = store.getState();
