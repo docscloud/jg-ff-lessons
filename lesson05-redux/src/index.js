@@ -15,7 +15,10 @@ const createStore = reducer => {
 
   const getState = () => state;
 
-  const dispatch = action => {};
+  const dispatch = action => {
+    state = reducer(state, action);
+    listeners.forEach(listener => listener());
+  };
 
   const subscribe = listener => {
     listeners.push(listener);
