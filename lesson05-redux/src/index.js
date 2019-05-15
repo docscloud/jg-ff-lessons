@@ -1,21 +1,20 @@
 import expect from 'expect';
-import deepFreeze from 'deep-freeze';
 
-const addCounter = list => {
-  return [...list, 0];
+const removeCounter = (list, index) => {
+  list.splice(index, 1);
+
+  return list;
 };
 
-const testAddCounter = () => {
-  const listBefore = [];
-  const listAfter = [0];
+const testRemoveCounter = () => {
+  const listBefore = [0, 10, 20];
+  const listAfter = [0, 20];
 
-  deepFreeze(listBefore);
-
-  expect(addCounter(listBefore)).toEqual(listAfter);
+  expect(removeCounter(listBefore, 1)).toEqual(listAfter);
 };
 
 try {
-  testAddCounter();
+  testRemoveCounter();
   document.body.innerHTML = '<h1 style="color: green">Test passed</h1>';
 } catch (e) {
   document.body.innerHTML = `<h1 style="color: red">Test failed</h1><p>${
