@@ -1,64 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ListItem from './list-item';
-import Input from './input';
 
-class List extends Component {
-  constructor() {
-    super();
-    this.state = {
-      items: [{ name: 'Test item', done: false }],
-      inputValue: ''
-    };
-  }
+const List = ({ items }) => (
+  <ul>
+    {items.map((item, index) => (
+      <ListItem key={`list-item-${index}`} item={item} />
+    ))}
+  </ul>
+);
 
-  removeItem = item => {
-    return () =>
-      this.setState({ items: this.state.items.filter(i => i !== item) });
-  };
+List.propTypes = {
+  items: PropTypes.array
+};
 
-  checkItem = item => {
-    return () =>
-      this.setState({
-        items: this.state.items.map(i =>
-          i === item ? { ...item, done: !item.done } : i
-        )
-      });
-  };
-
-  onInputChange = e => {
-    this.setState({ inputValue: e.currentTarget.value });
-  };
-
-  addTask = () => {
-    this.setState({
-      items: [
-        ...this.state.items,
-        { name: this.state.inputValue, done: false }
-      ],
-      inputValue: ''
-    });
-  };
-
-  render() {
-    const { items } = this.state;
-    return (
-      <>
-        <ul>
-          {items.map((item, index) => (
-            <ListItem
-              key={`list-item-${index}`}
-              item={item}
-              removeItem={this.removeItem(item)}
-              checkItem={this.checkItem(item)}
-            >
-              {item.name}
-            </ListItem>
-          ))}
-        </ul>
-        <Input onInputChange={this.onInputChange} addTask={this.addTask} />
-      </>
-    );
-  }
-}
-
-export default List;
+export default connect(state => ({
+  items: state.items
+}))(List);

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import Heading from './components/heading';
 import List from './components/list';
 import reducer from './reducer';
+import Input from './components/input';
 
 const store = createStore(
   reducer,
@@ -16,6 +17,7 @@ const App = () => (
   <Provider store={store}>
     <Heading />
     <List />
+    <Input />
   </Provider>
 );
 

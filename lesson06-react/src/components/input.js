@@ -11,8 +11,8 @@ const Input = ({ onInputChange, addTask, inputValue }) => (
 );
 
 Input.propTypes = {
-  onInputChange: PropTypes.instanceOf(onInputChange),
-  addTask: PropTypes.instanceOf(addTask),
+  onInputChange: PropTypes.func,
+  addTask: PropTypes.func,
   inputValue: PropTypes.string.isRequired
 };
 
