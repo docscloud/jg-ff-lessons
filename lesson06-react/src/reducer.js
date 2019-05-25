@@ -9,6 +9,13 @@ const reducer = (state = initialState, action) => {
       const { inputValue } = action;
       return { ...state, inputValue };
     }
+    case 'ADD_TASK': {
+      const { items, inputValue } = state;
+      return {
+        items: [...items, { name: inputValue, done: false }],
+        inputValue: ''
+      };
+    }
     default:
       return state;
   }

@@ -1,19 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { onInputChange, addTask } from '../actions';
 
-const Input = ({ addTask, inputValue, dispatch }) => {
-  const onInputChange = e => {
-    dispatch({ type: 'ON_INPUT_CHANGE', inputValue: e.currentTarget.value });
-  };
+const Input = ({ onInputChange, addTask, inputValue }) => (
+  <>
+    <input onChange={onInputChange} value={inputValue} />
+    <button onClick={addTask}>Add task</button>
+  </>
+);
 
-  return (
-    <>
-      <input onChange={onInputChange} value={inputValue} />
-      <button onClick={addTask}>Add task</button>
-    </>
-  );
+Input.propTypes = {
+  onInputChange: PropTypes.instanceOf(onInputChange),
+  addTask: PropTypes.instanceOf(addTask),
+  inputValue: PropTypes.string.isRequired
 };
 
-export default connect(state => ({
-  inputValue: state.inputValue
-}))(Input);
+export default connect(
+  state => ({
+    inputValue: state.inputValue
+  }),
+  { onInputChange, addTask }
+)(Input);
