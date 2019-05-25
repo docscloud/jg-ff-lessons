@@ -7,6 +7,7 @@ import Heading from './components/heading';
 import List from './components/list';
 import reducer from './reducer';
 import Input from './components/input';
+import Container from './components/container';
 
 const store = createStore(
   reducer,
@@ -16,7 +17,9 @@ const store = createStore(
 const App = () => (
   <Provider store={store}>
     <Heading />
-    <List />
+    <Container>
+      <List />
+    </Container>
     <Input />
   </Provider>
 );
