@@ -7,16 +7,21 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'DATA_LOADED': {
+      const { data } = action;
+      return { ...state, items: data ? Object.values(data.items) : [] };
+    }
     case 'ON_INPUT_CHANGE': {
       const { inputValue } = action;
 
       return { ...state, inputValue };
     }
     case 'ADD_TASK': {
-      const { items, inputValue } = state;
+      const { task } = action;
+      const { items } = state;
 
       return {
-        items: [...items, { id: generate(), name: inputValue, done: false }],
+        items: [...items, task],
         inputValue: ''
       };
     }
@@ -32,9 +37,7 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        items: items.map(i =>
-          i.id === item.id ? { ...item, done: !item.done } : i
-        )
+        items: items.map(i => (i.id === item.id ? item : i))
       };
     }
     default:

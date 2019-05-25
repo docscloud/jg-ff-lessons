@@ -6,7 +6,7 @@ import { onInputChange, addTask } from '../actions';
 const Input = ({ onInputChange, addTask, inputValue }) => (
   <>
     <input onChange={onInputChange} value={inputValue} />
-    <button onClick={addTask}>Add task</button>
+    <button onClick={() => addTask(inputValue)}>Add task</button>
   </>
 );
 

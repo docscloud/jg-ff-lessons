@@ -7,11 +7,17 @@ import Heading from './components/heading';
 import List from './components/list';
 import reducer from './reducer';
 import Input from './components/input';
+import dbRef from './dbRef';
 
 const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+dbRef
+  .once('value')
+  .then(data => data.val())
+  .then(data => store.dispatch({ type: 'DATA_LOADED', data }));
 
 const App = () => {
   const [display, setDisplay] = useState(true);
