@@ -7,7 +7,12 @@ export const onInputChange = e => ({
 });
 
 export const addTask = name => ({ dispatch }) => {
-  const task = { id: generate(), name, done: false };
+  const task = {
+    id: generate(),
+    name,
+    done: false,
+    createdAt: new Date().getTime()
+  };
 
   dbRef
     .update({ [`items/${task.id}/`]: task })
@@ -19,18 +24,32 @@ export const addTask = name => ({ dispatch }) => {
   };
 };
 
-export const checkItem = item => {
-  const updatedItem = { ...item, done: !item.done };
-  dbRef.update({ [`items/${item.id}`]: updatedItem });
+export const checkItem = item => ({ dispatch }) => {
+  const updatedItem = {
+    ...item,
+    done: !item.done,
+    updatedAt: new Date().getTime()
+  };
+
+  dbRef
+    .update({ [`items/${item.id}`]: updatedItem })
+    .then(() => dispatch({ type: 'CHECK_ITEM_DONE', item: updatedItem }))
+    .catch(error => dispatch({ type: 'CHECK_ITEM_ERROR', error }));
 
   return {
-    type: 'CHECK_ITEM',
-    item: updatedItem
+    type: 'CHECK_ITEM'
   };
 };
 
-export const removeItem = item => ({ getState, dispatch }) => {
-  dbRef.update({ [`items/${item.id}`]: null });
+export const removeItem = item => ({ dispatch }) => {
+  dbRef
+    .update({
+      [`items/${item.id}`]: null,
+      lastRomvedAt: new Date().getTime()
+    })
+    .then(() => dispatch({ type: 'REMOVE_ITEM_DONE', item }))
+    .catch(error => dispatch({ type: 'REMOVE_ITEM_ERROR', error }));
+
   return {
     type: 'REMOVE_ITEM',
     item

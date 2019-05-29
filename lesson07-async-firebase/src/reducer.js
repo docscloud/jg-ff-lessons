@@ -23,13 +23,13 @@ const reducer = (state = initialState, action) => {
         inputValue: ''
       };
     }
-    case 'REMOVE_ITEM': {
+    case 'REMOVE_ITEM_DONE': {
       const { item } = action;
       const { items } = state;
 
       return { items: items.filter(i => i.id !== item.id) };
     }
-    case 'CHECK_ITEM': {
+    case 'CHECK_ITEM_DONE': {
       const { item } = action;
       const { items } = state;
 
