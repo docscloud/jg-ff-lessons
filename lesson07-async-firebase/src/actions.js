@@ -30,7 +30,7 @@ export const checkItem = item => {
 };
 
 export const removeItem = item => ({ getState, dispatch }) => {
-  dbRef.child(`items/${item.id}`).remove();
+  dbRef.update({ [`items/${item.id}`]: null });
   return {
     type: 'REMOVE_ITEM',
     item
