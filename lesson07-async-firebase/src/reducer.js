@@ -1,7 +1,5 @@
-import { generate } from 'shortid';
-
 const initialState = {
-  items: [{ id: generate(), name: 'Test item', done: false }],
+  items: [],
   inputValue: 'test'
 };
 

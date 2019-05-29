@@ -29,7 +29,11 @@ export const checkItem = item => {
   };
 };
 
-export const removeItem = item => ({
-  type: 'REMOVE_ITEM',
-  item
-});
+export const removeItem = item => ({ getState, dispatch }) => {
+  const { items } = getState();
+  dbRef.update({ [`items`]: items.filter(i => i.id !== item.id) });
+  return {
+    type: 'REMOVE_ITEM',
+    item
+  };
+};
