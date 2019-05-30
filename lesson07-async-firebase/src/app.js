@@ -1,12 +1,10 @@
 import 'css/app.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import Heading from './components/heading';
-import List from './components/list';
+import Todo from './components/todo';
 import reducer from './reducer';
-import Input from './components/input';
 import dbRef from './dbRef';
 
 const store = createStore(
@@ -29,28 +27,9 @@ dbRef
   .then(data => store.dispatch({ type: 'DATA_LOADED', data }));
 
 const App = () => {
-  const [display, setDisplay] = useState(true);
-
   return (
     <Provider store={store}>
-      <Heading onClick={() => setDisplay(!display)} />
-      {display ? (
-        <List />
-      ) : (
-        <p
-          style={{
-            height: 30,
-            margin: 20,
-            fontSize: 16,
-            backgroundColor: 'lightblue',
-            textAlign: 'center'
-          }}
-        >
-          OOOPS
-        </p>
-      )}
-
-      <Input />
+      <Todo />
     </Provider>
   );
 };

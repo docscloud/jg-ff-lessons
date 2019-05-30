@@ -1,13 +1,23 @@
 const initialState = {
   items: [],
-  inputValue: 'test'
+  inputValue: 'test',
+  user: null
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'AUTH_DONE': {
+      return { ...state, user: action.user };
+    }
+
     case 'DATA_LOADED': {
       const { data } = action;
-      return { ...state, items: data ? Object.values(data.items) : [] };
+      const { items, user } = data || {};
+      return {
+        ...state,
+        items: Object.values(items),
+        user
+      };
     }
     case 'ON_INPUT_CHANGE': {
       const { inputValue } = action;
