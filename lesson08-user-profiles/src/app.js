@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import Cookie from 'js-cookie';
 import Todo from './components/todo';
 import items from './lib/tasks/reducer';
 import inputValue from './lib/inputValue/reducer';
@@ -12,7 +13,8 @@ import dbRef from './dbRef';
 const store = createStore(
   combineReducers({ items, inputValue, user }),
   applyMiddleware(({ getState, dispatch }) => next => action => {
-    const logger = a => console.log({ action: { ...a }, state: getState() });
+    const logger = a =>
+      console.log(a.type, { action: { ...a }, state: getState() });
     if (typeof action === 'function') {
       const plainAction = action({ getState, dispatch });
       logger(plainAction);
@@ -24,16 +26,22 @@ const store = createStore(
   })
 );
 
-dbRef
-  .once('value')
-  .then(data => data.val())
-  .then(data => store.dispatch({ type: 'DATA_LOADED', data }));
+const uid = Cookie.get('todo_user');
+console.log('UID', uid);
 
-// child_added listener receives all added childs on items collection
-dbRef.child('items').on('child_added', d => {
-  const task = d.val();
-  store.dispatch({ type: 'ADD_TASK_DONE', task });
-});
+if (uid) {
+  dbRef
+    .child(`${uid}`)
+    .once('value')
+    .then(data => data.val())
+    .then(data => store.dispatch({ type: 'DATA_LOADED', data }));
+
+  // child_added listener receives all added childs on items collection
+  dbRef.child(`${uid}/items`).on('child_added', d => {
+    const task = d.val();
+    store.dispatch({ type: 'ADD_TASK_DONE', task });
+  });
+}
 
 const App = () => {
   return (
