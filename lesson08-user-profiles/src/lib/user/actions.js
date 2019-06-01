@@ -31,6 +31,7 @@ export const loadData = () => ({ dispatch }) => {
     // child_added listener receives all added childs on items collection
     dbRef.child(`${uid}/items`).on('child_added', d => {
       const task = d.val();
+      console.log('ADDED TASK', task);
       dispatch({ type: 'ADD_TASK_DONE', task });
     });
   }

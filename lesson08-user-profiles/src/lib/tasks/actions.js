@@ -8,9 +8,13 @@ export const addTask = name => ({ dispatch, getState }) => {
     createdAt: new Date().getTime()
   };
 
-  dbRef
+  const id = dbRef
     .child(`${uid}/items`)
-    .push(task)
+    .push()
+    .getKey();
+
+  dbRef
+    .update({ [`${uid}/items/${id}`]: { ...task, id } })
     .catch(error => dispatch({ type: 'ADD_TASK_ERROR', error }));
 
   return {
