@@ -1,21 +1,24 @@
 import 'css/app.css';
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import Todo from './components/todo';
-import reducer from './reducer';
+import items from './lib/tasks/reducer';
+import inputValue from './lib/inputValue/reducer';
+import user from './lib/user/reducer';
 import dbRef from './dbRef';
 
 const store = createStore(
-  reducer,
+  combineReducers({ items, inputValue, user }),
   applyMiddleware(({ getState, dispatch }) => next => action => {
+    const logger = a => console.log({ action: { ...a }, state: getState() });
     if (typeof action === 'function') {
       const plainAction = action({ getState, dispatch });
-      console.log(plainAction.type, plainAction);
+      logger(plainAction);
       next(plainAction);
     } else {
-      console.log(action.type, action);
+      logger(action);
       next(action);
     }
   })

@@ -16,7 +16,7 @@ const Login = ({ dispatch }) => {
       })
       .then(user => {
         dbRef.update({ user }).then(() => {
-          dispatch({ type: 'AUTH_DONE', user });
+          dispatch(authUser(user));
         });
       });
 

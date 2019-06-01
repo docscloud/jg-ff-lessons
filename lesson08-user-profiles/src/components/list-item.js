@@ -1,12 +1,12 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removeItem, checkItem } from '../actions';
+import { removeTask, checkTask } from '../lib/tasks/actions';
 
 const ListItem = ({ item, dispatch }) => {
-  const onRemoveItem = () => dispatch(removeItem(item));
+  const onRemoveItem = () => dispatch(removeTask(item));
 
-  const onCheckItem = () => dispatch(checkItem(item));
+  const onCheckItem = () => dispatch(checkTask(item));
 
   return (
     <li

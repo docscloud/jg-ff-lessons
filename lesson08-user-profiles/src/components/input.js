@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { onInputChange, addTask } from '../actions';
+import { addTask } from '../lib/tasks/actions';
+import { onInputChange } from '../lib/inputValue/actions';
 
 const Input = ({ onInputChange, addTask, inputValue }) => (
   <>

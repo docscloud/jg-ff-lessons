@@ -1,9 +1,4 @@
-import dbRef from './dbRef';
-
-export const onInputChange = e => ({
-  type: 'ON_INPUT_CHANGE',
-  inputValue: e.currentTarget.value
-});
+import dbRef from '../../dbRef';
 
 export const addTask = name => ({ dispatch }) => {
   const task = {
@@ -22,7 +17,7 @@ export const addTask = name => ({ dispatch }) => {
   };
 };
 
-export const checkItem = item => ({ dispatch }) => {
+export const checkTask = item => ({ dispatch }) => {
   const updatedItem = {
     ...item,
     done: !item.done,
@@ -39,7 +34,7 @@ export const checkItem = item => ({ dispatch }) => {
   };
 };
 
-export const removeItem = item => ({ dispatch }) => {
+export const removeTask = item => ({ dispatch }) => {
   dbRef
     .update({
       [`items/${item.id}`]: null,
