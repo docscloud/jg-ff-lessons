@@ -26,6 +26,12 @@ dbRef
   .then(data => data.val())
   .then(data => store.dispatch({ type: 'DATA_LOADED', data }));
 
+// child_added listener receives all added childs on items collection
+dbRef.child('items').on('child_added', d => {
+  const task = d.val();
+  store.dispatch({ type: 'ADD_TASK_DONE', task });
+});
+
 const App = () => {
   return (
     <Provider store={store}>

@@ -1,4 +1,3 @@
-import { generate } from 'shortid';
 import dbRef from './dbRef';
 
 export const onInputChange = e => ({
@@ -13,14 +12,9 @@ export const addTask = name => ({ dispatch }) => {
     createdAt: new Date().getTime()
   };
 
-  const id = dbRef
-    .child('items')
-    .push()
-    .getKey();
-  console.log('ID', id);
   dbRef
-    .update({ [`items/${id}`]: { ...task, id } })
-    .then(() => dispatch({ type: 'ADD_TASK_DONE', task: { ...task, id } }))
+    .child('items')
+    .push(task)
     .catch(error => dispatch({ type: 'ADD_TASK_ERROR', error }));
 
   return {
