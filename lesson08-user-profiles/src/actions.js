@@ -8,15 +8,19 @@ export const onInputChange = e => ({
 
 export const addTask = name => ({ dispatch }) => {
   const task = {
-    id: generate(),
     name,
     done: false,
     createdAt: new Date().getTime()
   };
 
+  const id = dbRef
+    .child('items')
+    .push()
+    .getKey();
+  console.log('ID', id);
   dbRef
-    .update({ [`items/${task.id}/`]: task })
-    .then(() => dispatch({ type: 'ADD_TASK_DONE', task }))
+    .update({ [`items/${id}`]: { ...task, id } })
+    .then(() => dispatch({ type: 'ADD_TASK_DONE', task: { ...task, id } }))
     .catch(error => dispatch({ type: 'ADD_TASK_ERROR', error }));
 
   return {
