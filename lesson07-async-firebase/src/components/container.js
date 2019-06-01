@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// prop passed to component example
+<Container someProp="fdjksd" />;
+
 class Container extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { open: true };
   }
 
   toggle = () => {
+    // value from state
+    const inputValue = this.props.inputValue;
+    // value from component props
+    const someProp = this.props.someProp;
     this.setState({ open: !this.state.open });
   };
 
@@ -34,4 +41,4 @@ Container.propTypes = {
   children: PropTypes.any
 };
 
-export default Container;
+export default connect(state => ({ inputValue: state.inputValue }))(Container);
