@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { addTask } from '../lib/tasks/actions';
 import { onInputChange } from '../lib/inputValue/actions';
 
-const Input = ({ onInputChange, addTask, inputValue }) => (
+const Input = ({ inputValue, dispatch }) => (
   <>
-    <input onChange={onInputChange} value={inputValue} />
-    <button onClick={() => addTask(inputValue)}>Add task</button>
+    <input onChange={() => dispatch(onInputChange())} value={inputValue} />
+    <button onClick={() => dispatch(addTask(inputValue))}>Add task</button>
   </>
 );
 
@@ -20,6 +20,6 @@ Input.propTypes = {
 export default connect(
   state => ({
     inputValue: state.inputValue
-  }),
-  { onInputChange, addTask }
+  })
+  // { onInputChange, addTask }
 )(Input);

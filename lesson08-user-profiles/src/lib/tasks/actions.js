@@ -1,24 +1,26 @@
 import dbRef from '../../dbRef';
 
-export const addTask = name => ({ dispatch, getState }) => {
-  const { uid } = getState().user;
-  const task = {
-    name,
-    done: false,
-    createdAt: new Date().getTime()
-  };
+export const addTask = function(name) {
+  return function({ dispatch, getState }) {
+    const { uid } = getState().user;
+    const task = {
+      name,
+      done: false,
+      createdAt: new Date().getTime()
+    };
 
-  const id = dbRef
-    .child(`${uid}/items`)
-    .push()
-    .getKey();
+    const id = dbRef
+      .child(`${uid}/items`)
+      .push()
+      .getKey();
 
-  dbRef
-    .update({ [`${uid}/items/${id}`]: { ...task, id } })
-    .catch(error => dispatch({ type: 'ADD_TASK_ERROR', error }));
+    dbRef
+      .update({ [`${uid}/items/${id}`]: { ...task, id } })
+      .catch(error => dispatch({ type: 'ADD_TASK_ERROR', error }));
 
-  return {
-    type: 'ADD_TASK_START'
+    return {
+      type: 'ADD_TASK_START'
+    };
   };
 };
 

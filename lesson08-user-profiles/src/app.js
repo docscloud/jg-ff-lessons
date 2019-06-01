@@ -3,27 +3,29 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import Cookie from 'js-cookie';
 import Todo from './components/todo';
 import items from './lib/tasks/reducer';
 import inputValue from './lib/inputValue/reducer';
 import user from './lib/user/reducer';
-import dbRef from './dbRef';
 import { loadData } from './lib/user/actions';
+
+// custom middleware has 3 stages: first when state is initialised,
+// second when middleware is initialised and third when action is dispatched
+const customMiddleware = ({ getState, dispatch }) => next => action => {
+  const logger = a => console.log(a, getState());
+  if (typeof action === 'function') {
+    const plainAction = action({ getState, dispatch });
+    logger(plainAction);
+    next(plainAction);
+  } else {
+    logger(action);
+    next(action);
+  }
+};
 
 const store = createStore(
   combineReducers({ items, inputValue, user }),
-  applyMiddleware(({ getState, dispatch }) => next => action => {
-    const logger = a => console.log(a, getState());
-    if (typeof action === 'function') {
-      const plainAction = action({ getState, dispatch });
-      logger(plainAction);
-      next(plainAction);
-    } else {
-      logger(action);
-      next(action);
-    }
-  })
+  applyMiddleware(customMiddleware)
 );
 
 store.dispatch(loadData());
