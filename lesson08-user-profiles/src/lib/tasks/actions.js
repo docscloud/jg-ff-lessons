@@ -34,7 +34,6 @@ export const checkTask = item => ({ dispatch, getState }) => {
 
   dbRef
     .update({ [`${uid}/items/${item.id}`]: updatedItem })
-    .then(() => dispatch({ type: 'CHECK_ITEM_DONE', item: updatedItem }))
     .catch(error => dispatch({ type: 'CHECK_ITEM_ERROR', error }));
 
   return {
@@ -49,7 +48,6 @@ export const removeTask = item => ({ dispatch, getState }) => {
       [`${uid}/items/${item.id}`]: null,
       lastRomvedAt: new Date().getTime()
     })
-    .then(() => dispatch({ type: 'REMOVE_ITEM_DONE', item }))
     .catch(error => dispatch({ type: 'REMOVE_ITEM_ERROR', error }));
 
   return {

@@ -28,12 +28,23 @@ export const loadData = () => ({ dispatch }) => {
       .then(data => data.val())
       .then(data => dispatch({ type: 'DATA_LOADED', data }));
 
+    const itemsRef = dbRef.child(`${uid}/items`);
     // child_added listener receives all added childs on items collection
-    dbRef.child(`${uid}/items`).on('child_added', d => {
-      const task = d.val();
-      console.log('ADDED TASK', task);
-      dispatch({ type: 'ADD_TASK_DONE', task });
-    });
+    itemsRef.on('child_added', d =>
+      dispatch({ type: 'ADD_TASK_DONE', task: d.val() })
+    );
+
+    // child_changed listener receives the item that was changed on every change
+    itemsRef.on('child_changed', d =>
+      dispatch({ type: 'CHECK_ITEM_DONE', item: d.val() })
+    );
+
+    // child_removed listener receives every removed item
+    itemsRef.on('child_removed', d =>
+      dispatch({ type: 'REMOVE_ITEM_DONE', item: d.val() })
+    );
+
+    dbRef.child(`${uid}/user`).on('value', d => console.log('USER', d.val()));
   }
 
   return { type: 'DATA_NOT_LOADED' };
