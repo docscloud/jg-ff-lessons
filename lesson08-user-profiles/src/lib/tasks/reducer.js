@@ -5,7 +5,7 @@ const reducer = (state = initialState, action) => {
     case 'DATA_LOADED': {
       const { data } = action;
       const { items } = data || {};
-      return [...Object.values(items)];
+      return [...Object.values(items || {})];
     }
 
     case 'ADD_TASK_DONE': {

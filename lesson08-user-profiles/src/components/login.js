@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Cookie from 'js-cookie';
 import dbRef from '../dbRef';
-import { authUser } from '../lib/user/actions';
+import { authUser, loadData } from '../lib/user/actions';
 
 const Login = ({ dispatch }) => {
   const [username, setUsername] = useState('');
@@ -22,7 +22,8 @@ const Login = ({ dispatch }) => {
         dbRef.update({ user }).then(() => {
           dispatch(authUser(user));
         });
-      });
+      })
+      .then(() => dispatch(loadData()));
   };
 
   return (

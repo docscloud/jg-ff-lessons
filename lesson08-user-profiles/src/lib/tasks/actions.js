@@ -1,6 +1,7 @@
 import dbRef from '../../dbRef';
 
-export const addTask = name => ({ dispatch }) => {
+export const addTask = name => ({ dispatch, getState }) => {
+  const { uid } = getState().user;
   const task = {
     name,
     done: false,
@@ -8,7 +9,7 @@ export const addTask = name => ({ dispatch }) => {
   };
 
   dbRef
-    .child('items')
+    .child(`${uid}/items`)
     .push(task)
     .catch(error => dispatch({ type: 'ADD_TASK_ERROR', error }));
 
@@ -17,7 +18,8 @@ export const addTask = name => ({ dispatch }) => {
   };
 };
 
-export const checkTask = item => ({ dispatch }) => {
+export const checkTask = item => ({ dispatch, getState }) => {
+  const { uid } = getState().user;
   const updatedItem = {
     ...item,
     done: !item.done,
@@ -25,7 +27,7 @@ export const checkTask = item => ({ dispatch }) => {
   };
 
   dbRef
-    .update({ [`items/${item.id}`]: updatedItem })
+    .update({ [`${uid}/items/${item.id}`]: updatedItem })
     .then(() => dispatch({ type: 'CHECK_ITEM_DONE', item: updatedItem }))
     .catch(error => dispatch({ type: 'CHECK_ITEM_ERROR', error }));
 
@@ -34,10 +36,11 @@ export const checkTask = item => ({ dispatch }) => {
   };
 };
 
-export const removeTask = item => ({ dispatch }) => {
+export const removeTask = item => ({ dispatch, getState }) => {
+  const { uid } = getState().user;
   dbRef
     .update({
-      [`items/${item.id}`]: null,
+      [`${uid}/items/${item.id}`]: null,
       lastRomvedAt: new Date().getTime()
     })
     .then(() => dispatch({ type: 'REMOVE_ITEM_DONE', item }))

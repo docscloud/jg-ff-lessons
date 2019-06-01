@@ -9,12 +9,12 @@ import items from './lib/tasks/reducer';
 import inputValue from './lib/inputValue/reducer';
 import user from './lib/user/reducer';
 import dbRef from './dbRef';
+import { loadData } from './lib/user/actions';
 
 const store = createStore(
   combineReducers({ items, inputValue, user }),
   applyMiddleware(({ getState, dispatch }) => next => action => {
-    const logger = a =>
-      console.log(a.type, { action: { ...a }, state: getState() });
+    const logger = a => console.log(a, getState());
     if (typeof action === 'function') {
       const plainAction = action({ getState, dispatch });
       logger(plainAction);
@@ -26,22 +26,7 @@ const store = createStore(
   })
 );
 
-const uid = Cookie.get('todo_user');
-console.log('UID', uid);
-
-if (uid) {
-  dbRef
-    .child(`${uid}`)
-    .once('value')
-    .then(data => data.val())
-    .then(data => store.dispatch({ type: 'DATA_LOADED', data }));
-
-  // child_added listener receives all added childs on items collection
-  dbRef.child(`${uid}/items`).on('child_added', d => {
-    const task = d.val();
-    store.dispatch({ type: 'ADD_TASK_DONE', task });
-  });
-}
+store.dispatch(loadData());
 
 const App = () => {
   return (

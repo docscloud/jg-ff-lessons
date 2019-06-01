@@ -6,6 +6,9 @@ const userReducer = (state = initialState, action) => {
       return { ...action.user };
     }
 
+    case 'LOGGED_OUT':
+      return null;
+
     case 'DATA_LOADED': {
       const { data } = action;
       const { user } = data || {};
