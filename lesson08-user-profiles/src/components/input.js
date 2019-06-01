@@ -6,7 +6,7 @@ import { onInputChange } from '../lib/inputValue/actions';
 
 const Input = ({ inputValue, dispatch }) => (
   <>
-    <input onChange={() => dispatch(onInputChange())} value={inputValue} />
+    <input onChange={e => dispatch(onInputChange(e))} value={inputValue} />
     <button onClick={() => dispatch(addTask(inputValue))}>Add task</button>
   </>
 );
@@ -17,9 +17,6 @@ Input.propTypes = {
   inputValue: PropTypes.string.isRequired
 };
 
-export default connect(
-  state => ({
-    inputValue: state.inputValue
-  })
-  // { onInputChange, addTask }
-)(Input);
+export default connect(state => ({
+  inputValue: state.inputValue
+}))(Input);

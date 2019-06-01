@@ -7,7 +7,7 @@ import Todo from './components/todo';
 import items from './lib/tasks/reducer';
 import inputValue from './lib/inputValue/reducer';
 import user from './lib/user/reducer';
-import { loadData } from './lib/user/actions';
+import { initialiseListeners } from './lib/user/actions';
 
 // custom middleware has 3 stages: first when state is initialised,
 // second when middleware is initialised and third when action is dispatched
@@ -28,7 +28,7 @@ const store = createStore(
   applyMiddleware(customMiddleware)
 );
 
-store.dispatch(loadData());
+store.dispatch(initialiseListeners());
 
 const App = () => {
   return (

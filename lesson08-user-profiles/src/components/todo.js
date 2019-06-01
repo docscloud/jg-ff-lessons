@@ -14,6 +14,7 @@ class Todo extends Component {
         <Heading />
         <List />
         <Input />
+        {user && <Listener />}
       </>
     ) : (
       <Login />

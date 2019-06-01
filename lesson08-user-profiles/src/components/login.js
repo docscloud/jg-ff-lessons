@@ -3,28 +3,12 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Cookie from 'js-cookie';
 import dbRef from '../dbRef';
-import { authUser, loadData } from '../lib/user/actions';
+import { authUser, initialiseListeners } from '../lib/user/actions';
 
 const Login = ({ dispatch }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const onClick = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(username, password)
-      .then(firebaseUser => {
-        const { uid, email } = (firebaseUser || {}).user;
-        Cookie.set('todo_user', uid);
-
-        return { uid, email };
-      })
-      .then(user => {
-        dbRef.update({ user }).then(() => {
-          dispatch(authUser(user));
-        });
-      })
-      .then(() => dispatch(loadData()));
-  };
+  const onClick = () => dispatch(authUser({ username, password }));
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
