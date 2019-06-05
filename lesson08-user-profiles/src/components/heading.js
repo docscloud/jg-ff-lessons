@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button, Navbar, NavbarBrand } from 'reactstrap';
 import { logOut } from '../lib/user/actions';
 
 const Heading = ({ onClick, logOut, dispatch }) => (
-  <div>
-    <h1 onClick={onClick}>Todo List</h1>
-    <button onClick={logOut}>Logout</button>
-  </div>
+  <Navbar color="light" light>
+    <NavbarBrand href="/">Todo List</NavbarBrand>
+    <Button onClick={logOut} color="danger">
+      Logout
+    </Button>
+  </Navbar>
 );
 
 export default connect(
