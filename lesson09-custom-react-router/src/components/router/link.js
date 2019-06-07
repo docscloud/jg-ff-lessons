@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { historyPush, historyReplace } from '../../lib/router/utils';
+import { historyPush, historyReplace } from '../../lib/router';
 
 const Link = ({ to, replace, children }) => {
   const onClick = e => {

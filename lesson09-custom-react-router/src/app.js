@@ -9,6 +9,7 @@ import items from './lib/tasks/reducer';
 import inputValue from './lib/inputValue/reducer';
 import user from './lib/user/reducer';
 import { initialiseListeners } from './lib/user/actions';
+import Route from './components/router/route';
 
 // custom middleware has 3 stages: first when state is initialised,
 // second when middleware is initialised and third when action is dispatched

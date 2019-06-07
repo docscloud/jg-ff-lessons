@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
-import Input from './input';
 import Heading from './heading';
-import List from './list';
 import Login from './login';
 import PropTypes from 'prop-types';
+import Route from './router/route';
+import Body from './body';
 
 class Todo extends Component {
   render() {
     const { user } = this.props;
+
     return user ? (
       <Row>
         <Col xs={12} sm={{ size: 8, offset: 2 }} style={{ padding: 20 }}>
           <Heading />
         </Col>
         <Col xs={12} sm={{ size: 8, offset: 2 }} style={{ padding: 20 }}>
-          <List />
-        </Col>
-        <Col xs={12} sm={{ size: 8, offset: 2 }} style={{ padding: 20 }}>
-          <Input />
+          <Route path="/" component={Body} />
+          <Route path="/about" component={() => <h1>About page</h1>} />
         </Col>
       </Row>
     ) : (
