@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { register, unregister } from '../../lib/router';
+import { register, unregister, matchPath } from '../../lib/router';
 
 class Route extends Component {
   componentWillMount() {
@@ -18,9 +18,9 @@ class Route extends Component {
   };
 
   render() {
-    const { path, component } = this.props;
+    const { exact, path, component } = this.props;
 
-    const match = new RegExp(`^${path}`).exec(location.pathname);
+    const match = matchPath(location.pathname, { path, exact });
 
     if (!match) return null;
 

@@ -17,7 +17,7 @@ class Todo extends Component {
           <Heading />
         </Col>
         <Col xs={12} sm={{ size: 8, offset: 2 }} style={{ padding: 20 }}>
-          <Route path="/" component={Body} />
+          <Route exact path="/" component={Body} />
           <Route path="/about" component={() => <h1>About page</h1>} />
         </Col>
       </Row>
